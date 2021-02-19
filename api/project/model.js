@@ -2,17 +2,17 @@
 const db = require("../../data/dbConfig")
 
 function get() {
-    return db("project")
+    return db("projects")
 }
 
 function getById(id) {
-    return db("project")
-    .where({id})
+    return db("projects")
+    .where("project_id",id)
     .first()
 }
 
 function add(project) {
-    return db("project")
+    return db("projects")
     .insert(project)
     .then(ids => {
         return getById(ids[0])

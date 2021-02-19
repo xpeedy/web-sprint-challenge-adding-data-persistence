@@ -13,8 +13,8 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     Project.add(req.body).then(project => {
-        project ?
-        res.status(201).json(project) :
+        req.body ?
+        res.status(201).json(req.body) :
         res.status(400).json({message:"cant add project"})
     })
 })
