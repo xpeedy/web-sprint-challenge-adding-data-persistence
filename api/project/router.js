@@ -1,15 +1,22 @@
 // build your `/api/projects` router here
 const express = require("express")
-const db = require("../../data/dbConfig")
 const router = express.Router()
 const Project = require("./model")
 
 router.get("/", (req, res) => {
-    db("projects")
+    Project.get().then(projects => {
+        projects ?
+        res.status(200).json(projects) :
+        res.status(404).json({message:"not found"})
+    })
 })
 
 router.post("/", (req, res) => {
-    db("projects")
+    Project.add(req.body).then(project => {
+        project ?
+        res.status(201).json(project) :
+        res.status(400).json({message:"cant add project"})
+    })
 })
 
 module.exports = router;
